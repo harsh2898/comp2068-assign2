@@ -2,5 +2,5 @@
  * Created by test on 17/11/2016.
  */
 module.exports = {
-    db: 'mongodb:///localhost/comp2068-fri'
+    db: 'mongodb://harshpatel:harsh2898@ds157487.mlab.com:57487/assignment'
 };
