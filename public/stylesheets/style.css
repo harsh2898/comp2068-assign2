@@ -1,8 +1,15 @@
 body {
-  padding: 50px;
+  padding: 0px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
-
+nav {
+  background-color: black;
+}
 a {
   color: #00B7FF;
+}
+footer {
+  font-family: Papyrus;
+  font-style: oblique;
+  text-align: right;
 }
