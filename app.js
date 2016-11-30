@@ -8,6 +8,9 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
+//adding reference to the assignments controller
+var assignments = require('./routes/assignments');
+
 var app = express();
 
 // view engine setup
@@ -29,6 +32,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
+// use the assignments controller for "/assignments"
+app.use('/assignments', assignments);
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
