@@ -31,4 +31,4 @@ var assignSchema = new mongoose.Schema({
 });
 
 //making the class public
-modeule.exports = mongoose.model('Assignment', assignSchema);
+module.exports = mongoose.model('Assignment', assignSchema);
