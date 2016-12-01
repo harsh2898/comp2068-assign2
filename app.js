@@ -7,7 +7,6 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-
 //adding reference to the assignments controller
 var assignments = require('./routes/assignments');
 
@@ -17,23 +16,40 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.use('/', routes);
+app.use('/users', users);
+app.use('/assignments', assignments)
+
 // using mongoose to connecet to mongodb
 var mongoose = require('mongoose');
 var config = require('./config/globalVars');
 mongoose.connect(config.db);
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+// include passport packages
+var passport = require('passport');
+var session = require('express-session');
+var flash = require('connect-flash');
+var localStrategy = require('passport-local').Strategy;
 
-app.use('/', routes);
-app.use('/users', users);
-// use the assignments controller for "/assignments"
-app.use('/assignments', assignments);
+// initialize the passport packages for authentication
+app.use(flash());
+
+app.use(session({
+  secret: config.secret,
+  resave: true,
+  saveUninitialized: false
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+// linking to the Account model
+var Account = require('./models/account');
+passport.use(Account.createStrategy());
+
+// read / write users b/w passport and mongodb
+passport.serializeUser(Account.serializeUser());
+passport.deserializeUser(Account.deserializeUser());
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
