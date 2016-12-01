@@ -12,8 +12,8 @@
         <th>Due Date</th>
         <th>Description</th>
         <th>Weightage(in %)</th>
-        <th>Delete</th>
         <th>Edit</th>
+        <th>Delete</th>
     </tr>
     <% for(var i=0; i < assignments.length; i++) { %>
         <tr>
@@ -23,8 +23,8 @@
             <td><%= assignments[i].dueDate %></td>
             <td><%= assignments[i].description %></td>
             <td><%= assignments[i].weightage %></td>
+            <td><a href="/assignments/<%= assignments[i]._id %>">Edit</a></td>
             <td><a href="/assignments/delete/<%= assignments[i]._id %>" class="confirmation">Delete</a></td>
-            <td><a href="#">Edit</a></td>
         </tr>
     <% } %>
 </table>

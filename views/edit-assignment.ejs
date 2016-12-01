@@ -1,0 +1,33 @@
+<% include partials/header.ejs %>
+
+<h1>Assignment Details</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label for="stuName" class="col-sm-2 control-label">Student Name:</label>
+        <input name="stuName" id="stuName" placeholder="Student Name" required value="<%= assignment.stuName %>" />
+    </div>
+    <div class="form-group">
+        <label for="course" class="col-sm-2 control-label">Course:</label>
+        <input name="course" id="course"  placeholder="Course Name" required value="<%= assignment.course %>" />
+    </div>
+    <div class="form-group">
+        <label for="assignName" class="col-sm-2 control-label">Assignment Name:</label>
+        <input name="assignName" id="assignName"  placeholder="Assignment Name" required value="<%= assignment.assignName %>" />
+    </div>
+    <div class="form-group">
+        <label for="dueDate" class="col-sm-2 control-label">Due Date:</label>
+        <input name="dueDate" id="dueDate" type="date" required value="<%= assignment.dueDate %>" />
+    </div>
+    <div class="form-group">
+        <label for="description" class="col-sm-2 control-label">Description:</label>
+        <input name="description" id="description"  placeholder="Description or extra info." required value="<%= assignment.description %>" />
+    </div>
+    <div class="form-group">
+        <label for="weightage" class="col-sm-2 control-label">Weightage in %:</label>
+        <input name="weightage" id="weightage" type="number" min="1" max="100" required value="<%= assignment.weightage %>" />
+    </div>
+    <button class="btn btn-primary col-sm-offset-2">Add</button>
+
+</form>
+<% include partials/footer.ejs %>
