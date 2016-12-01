@@ -2,4 +2,32 @@
 
 <h1><%= title %></h1>
 
+<a href="/assignments/add">Add your Assignment</a>
+
+<table class="table table-striped">
+    <tr>
+        <th>Student Name</th>
+        <th>Course</th>
+        <th>Assignment</th>
+        <th>Due Date</th>
+        <th>Description</th>
+        <th>Weightage(in %)</th>
+        <th>Delete</th>
+        <th>Edit</th>
+    </tr>
+    <% for(var i=0; i < assignments.length; i++) { %>
+        <tr>
+            <td><%= assignments[i].stuName %></td>
+            <td><%= assignments[i].course %></td>
+            <td><%= assignments[i].assignName %></td>
+            <td><%= assignments[i].dueDate %></td>
+            <td><%= assignments[i].description %></td>
+            <td><%= assignments[i].weightage %></td>
+            <td><a href="/assignments/delete/<%= assignments[i]._id %>" class="confirmation">Delete</a></td>
+            <td><a href="#">Edit</a></td>
+        </tr>
+    <% } %>
+</table>
+
+
 <% include partials/footer.ejs %>
