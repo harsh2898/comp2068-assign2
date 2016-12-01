@@ -7,8 +7,17 @@ var router = express.Router();
 //link to the assignments model
 var Assignment = require('../models/assignment');
 
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) {
+        next();
+    }
+    else {
+        res.redirect('/login');
+    }
+}
+
 // GET main assignments page
-router.get('/', function(req, res, next) {
+router.get('/', isLoggedIn, function(req, res, next) {
 
     Assignment.find(function(err, assignments) {
         if (err) {
@@ -19,19 +28,23 @@ router.get('/', function(req, res, next) {
             // load the assignments page and passing the result
             res.render('assignments', {
                 title: 'Assignment',
-                assignments: assignments
+                assignments: assignments,
+                user: req.user
             });
         }
     });
 });
 
 /* GET /assignments/add */
-router.get('/add', function(req, res, next) {
-    res.render('add-assignment', { title: 'Add your Assignment'})
+router.get('/add', isLoggedIn, function(req, res, next) {
+    res.render('add-assignment', {
+        title: 'Add your Assignment',
+        user: req.user
+    });
 });
 
 /* POST /assignments/add */
-router.post('/add', function(req, res, next) {
+router.post('/add', isLoggedIn, function(req, res, next) {
     // get the form inputs and using mongoose to insert to the db
     Assignment.create({
         stuName: req.body.stuName,
@@ -52,7 +65,7 @@ router.post('/add', function(req, res, next) {
 });
 
 /* GET /assignments/delete/_id  - delete process */
-router.get('/delete/:_id', function(req, res, next) {
+router.get('/delete/:_id', isLoggedIn, function(req, res, next) {
     // get the id from the url
     var _id = req.params._id;
 
@@ -72,7 +85,7 @@ router.get('/delete/:_id', function(req, res, next) {
 });
 
 /* GET /assignments/_id - display edit and fill */
-router.get('/:_id', function(req, res, next) {
+router.get('/:_id', isLoggedIn, function(req, res, next) {
     // get id from the url
     var _id = req.params._id;
 
@@ -88,14 +101,15 @@ router.get('/:_id', function(req, res, next) {
         else {
             res.render('edit-assignment', {
                 title: 'Edit an Assignment',
-                assignment: assignment
+                assignment: assignment,
+                user: req.user
             });
         }
     });
 });
 
 /* POST /drinks/_id  - update and save the assignment */
-router.post('/:_id', function(req, res, next) {
+router.post('/:_id', isLoggedIn, function(req, res, next) {
     // get the id from the url
     var _id = req.params._id;
 

@@ -8,13 +8,16 @@ var flash = require('connect-flash');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Assignment Tracker' });
+  res.render('index', { title: 'Assignment Tracker',
+  user: req.user
+  });
 });
 
 /* GET signup */
 router.get('/signup', function(req, res, next) {
   res.render('signup', {
-    title: 'Sign Up'
+      title: 'Sign Up',
+      user: req.user
   });
 });
 
@@ -37,22 +40,24 @@ router.post('/signup', function(req, res, next) {
 
 /* GET login */
 router.get('/login', function(req, res, next) {
+
     var messages = req.session.messages || [];
 
-    // clear the message in the session
+    // clear the session messages
     req.session.messages = [];
 
-  res.render('login', {
-    title: 'Login',
-      messages: messages
-  });
+    res.render('login', {
+        title: 'Login',
+        messages: messages,
+        user: req.user
+    });
 });
 
 /* POST login */
 router.post('/login', passport.authenticate('local', {
     successRedirect: '/assignments',
     failureRedirect: '/login',
-    failureMesasge: 'Invalid Login',
+    failureMessage: 'Invalid Login',
     failureFlash: true
 }));
 
