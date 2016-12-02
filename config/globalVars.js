@@ -10,7 +10,7 @@ module.exports = {
         facebook: {
             clientID: '1653071661657926',
             clientSecret: '40f0761b647c409b937b8f5a5ebba96d',
-            callbackURL: 'http://localhost:3000/facebook/callback'
+            callbackURL: 'https://assigntracker.herokuapp.com/facebook/callback'
         }
     }
 };
