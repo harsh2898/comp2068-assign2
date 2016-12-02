@@ -11,7 +11,7 @@ $('.confirmation').on('click', function() {
 });
 
 // password check on register Form
-var validator = $('#registerForm').validate({
+var validator = $('#signupForm').validate({
     rules: {
         confirm: {
             required: true,

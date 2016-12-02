@@ -1,12 +1,15 @@
 body {
   padding: 0px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-image: url("../images/images.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 nav {
   background-color: black;
 }
 a {
-  color: #00B7FF;
+  color: #A900B2 !important;
 }
 footer {
   font-family: Papyrus;
